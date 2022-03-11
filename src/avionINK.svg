@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be8, 2022-02-05)"
+   sodipodi:docname="avion.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.49264169"
+     inkscape:cx="396.84014"
+     inkscape:cy="560.24491"
+     inkscape:window-width="1440"
+     inkscape:window-height="900"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffff00;stroke-width:0.245066"
+       id="rect267"
+       width="23.631104"
+       height="171.86258"
+       x="90.764915"
+       y="58.540684" />
+    <rect
+       style="fill:#ffff00;stroke-width:0.264583"
+       id="rect269"
+       width="174.01086"
+       height="22.019886"
+       x="17.186256"
+       y="105.80289" />
+    <rect
+       style="fill:#ffff00;stroke-width:0.264583"
+       id="rect271"
+       width="71.430374"
+       height="25.242313"
+       x="67.13382"
+       y="191.1971" />
+    <rect
+       style="fill:#ffff00;stroke-width:0.264583"
+       id="rect485"
+       width="23.094032"
+       height="4.8336349"
+       x="152.52803"
+       y="120.84087" />
+  </g>
+</svg>
