@@ -11,8 +11,7 @@ redirect: default
 
 # cpp example
 exe := button
-srcs_sma := src/flux1_factorised.sma src/flux2_factorised.sma src/flux1.sma src/flux2.sma  src/Button.sma src/main.sma
-#srcs_sma := $(shell find $(src_dir) -name "*.sma")
+srcs_sma := src/Button.sma  src/main.sma#srcs_sma := $(shell find $(src_dir) -name "*.sma")
 srcs_other := src/foo.cpp
 #srcs_other := $(shell find $(src_dir) -name "*.cpp")
 
