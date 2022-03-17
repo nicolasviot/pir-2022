@@ -4,7 +4,7 @@ use gui
 use base
 
 import Button
-
+import Robot
 
 
 _action_
@@ -72,7 +72,7 @@ data.delta = 10
 
 _main_
 Component root {
-  Frame f ("Robot", 0, 0, 1920, 1080)
+  Frame f ("robot", 0, 0, 1920, 1080)
   Exit quit (0, 1)
   f.close->quit
 
@@ -83,65 +83,65 @@ Rectangle ree (0,0, 1900, 1000, 0, 0)
    Int tragetX (1500)
    
 
-  /*Robot vue de face*/
+  /*robot vue de face*/
   //svg = loadFromXML ("src/vueface.png")
  // Rotation Rot(0,440,330)
-  Image Robot_vueface ("src/vueface.png", 1570, 780, 150, 150)
+  Image robot_vueface ("src/vueface.png", 1570, 780, 150, 150)
 
 
         //doit etre actif à l'arrivé de point d'arret
 
-                                FSM fsm1 {
-                                State idle1 {
-                                
-                                  FillColor reed (255, 0, 0)
-                                  //Rectangle ree (1580, 620, 400, 400, 5, 5)
-                                  //Circle c1 (200, 200, 50)
-                                  Image direct ("src/direct.png", 1540, 840, 55, 45)
-                                  Image direct2 ("src/direct2.png", 1700, 840, 55, 45)
-                                  Timer t (100)
-                                }
-                                State pressed1
-                                {
-                                  
-                                  FillColor reed (255, 0, 0)
-                                  Rectangle ree (1580, 6200, 400, 400, 5, 5)
-                                  //Circle c1 (200, 200, 50)
-                                  Image direct ("src/direct.png", 1530, 840, 55, 45)
-                                  Image direct2 ("src/direct2.png", 1710, 840, 55, 45)
-                                  Timer t (100)
-                                }
+    FSM fsm1 {
+    State idle1 {
+    
+      FillColor reed (255, 0, 0)
+      //Rectangle ree (1580, 620, 400, 400, 5, 5)
+      //Circle c1 (200, 200, 50)
+      Image direct ("src/direct.png", 1540, 840, 55, 45)
+      Image direct2 ("src/direct2.png", 1700, 840, 55, 45)
+      Timer t (100)
+    }
+    State pressed1
+    {
+      
+      FillColor reed (255, 0, 0)
+      Rectangle ree (1580, 6200, 400, 400, 5, 5)
+      //Circle c1 (200, 200, 50)
+      Image direct ("src/direct.png", 1530, 840, 55, 45)
+      Image direct2 ("src/direct2.png", 1710, 840, 55, 45)
+      Timer t (100)
+    }
 
-                                State pressed2
-                                {
-                                
-                                  FillColor reed (255, 0, 0)
-                                  Rectangle ree (1580, 6200, 400, 400, 5, 5)
-                                  
-                                  Image direct ("src/direct.png", 1520, 840, 55, 45)
-                                  Image direct2 ("src/direct2.png", 1720, 840, 55, 45)
-                                  Timer t (100)
-                                }
+    State pressed2
+    {
+    
+      FillColor reed (255, 0, 0)
+      Rectangle ree (1580, 6200, 400, 400, 5, 5)
+      
+      Image direct ("src/direct.png", 1520, 840, 55, 45)
+      Image direct2 ("src/direct2.png", 1720, 840, 55, 45)
+      Timer t (100)
+    }
 
-                                State pressed3
-                                {
-                                  
-                                  FillColor reed (255, 0, 0)
-                              Rectangle ree (1580, 6200, 400, 400, 5, 5)
-                                  //Circle c1 (200, 200, 50)
-                                  Image direct ("src/direct.png", 1510, 840, 55, 45)
-                                  Image direct2 ("src/direct2.png", 1730, 840, 55, 45)
-                                  Timer t (100)
-                                }
+    State pressed3
+    {
+      
+      FillColor reed (255, 0, 0)
+  Rectangle ree (1580, 6200, 400, 400, 5, 5)
+      //Circle c1 (200, 200, 50)
+      Image direct ("src/direct.png", 1510, 840, 55, 45)
+      Image direct2 ("src/direct2.png", 1730, 840, 55, 45)
+      Timer t (100)
+    }
 
 
-                                idle1->pressed1 (idle1.t.end)
-                                pressed1->pressed2 (pressed1.t.end)
-                                pressed2->pressed3 (pressed2.t.end)
-                                pressed3->idle1 (pressed3.t.end)
-                                
-                                
-                              }
+    idle1->pressed1 (idle1.t.end)
+    pressed1->pressed2 (pressed1.t.end)
+    pressed2->pressed3 (pressed2.t.end)
+    pressed3->idle1 (pressed3.t.end)
+    
+    
+  }
 
 
 
@@ -163,10 +163,10 @@ Rectangle ree (0,0, 1900, 1000, 0, 0)
   Image img ("src/Crte.png", 0, 0, 750, 500)
   
   
-  /*Robot*/
+  /*robot*/
   svg = loadFromXML ("src/Robot.png")
   Rotation Rot(0,440,330)
-  Image Robot ("src/Robot.png", 425, 340, 150, 150)
+  Image robot ("src/Robot.png", 425, 340, 150, 150)
 
 
   /*ponit*/
@@ -174,14 +174,44 @@ Rectangle ree (0,0, 1900, 1000, 0, 0)
   Image point ("src/point.png", 425, 340, 150, 150)
   
 
-/*Bombe*/
+/*bombe*/
   svg1 = loadFromXML ("src/Bombe.png")
   
-  Image Bombe ("src/Bombe.png", 0, 0, 35, 45)
-  
-f.move.x=:>Bombe.x
+  Image bombe ("src/Bombe.png", 0, 0, 35, 45)
 
-f.move.y=:>Bombe.y
+  Double to_be_squared(0)
+  Double distance(0)
+
+  Sqrt mysqrt(0)
+  Pow left_pow (0, 2)
+  Pow right_pow (0, 2)
+
+  robot.x - bombe.x =:> left_pow.base 
+  robot.y - bombe.y =:> right_pow.base
+  left_pow.result + right_pow.result =:> to_be_squared
+  to_be_squared =:> mysqrt.input
+  mysqrt.output => distance
+
+
+  LogPrinter lp("Debug : ")
+
+
+  distance =:> lp.input
+/*
+  Spike something_moved
+
+  robot.x -> something_moved
+  robot.y -> something_moved
+  bombe.x -> something_moved
+  bombe.y -> something_moved
+*/
+  
+f.move.x=:>bombe.x
+
+f.move.y=:>bombe.y
+
+
+
 
 
 
@@ -195,14 +225,14 @@ f.move.y=:>Bombe.y
 
 FSM fsm {
     State idle {
-      Image Bombe ("src/start.png",0, 0, 100, 100)
+      Image bombe ("src/start.png",0, 0, 100, 100)
       FillColor red (255, 0, 0)
       FillOpacity a (0)
       Rectangle r (0, 0, 100, 100, 0, 0)
     }
     State pressed
     {
-      Image Bombe ("src/arret.png",1700,0, 100, 100)
+      Image bombe ("src/arret.png",1700,0, 100, 100)
 
       FillColor green (255, 0, 0)
       
@@ -235,8 +265,8 @@ FSM fsm {
         0 =: y.delta
         sec.tick -> x
         sec.tick -> y
-        x.state =:> Robot.x
-        y.state =:> Robot.y
+        x.state =:> robot.x
+        y.state =:> robot.y
 
         (x.state-100) => point.x
         y.state => point.y
@@ -277,9 +307,9 @@ FSM fsm {
         NativeAction na5 (smala_action5,x,1)
         b2.click->na5
 
-        (Robot.x>1500) ->na5
+        (robot.x>1500) ->na5
 
-        (Robot.x>Bombe.x-25 && Robot.x<Bombe.x+25) ->na5
+        (distance < robot.width + 75) ->na5
       
         
         
@@ -313,6 +343,11 @@ FSM fsm {
     
   }
 
+
+
+
+
+Robot myrobot("src/Robot.png", 0, 0)
 }
 
 
