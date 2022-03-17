@@ -76,10 +76,11 @@ Component root {
   Exit quit (0, 1)
   f.close->quit
 
-     
+FillColor reed (250, 250, 255)
+Rectangle ree (0,0, 1900, 1000, 0, 0) 
 
 
-   
+   Int tragetX (1500)
    
 
   /*Robot vue de face*/
@@ -88,60 +89,71 @@ Component root {
   Image Robot_vueface ("src/vueface.png", 1570, 780, 150, 150)
 
 
+        //doit etre actif à l'arrivé de point d'arret
+
+                                FSM fsm1 {
+                                State idle1 {
+                                
+                                  FillColor reed (255, 0, 0)
+                                  //Rectangle ree (1580, 620, 400, 400, 5, 5)
+                                  //Circle c1 (200, 200, 50)
+                                  Image direct ("src/direct.png", 1540, 840, 55, 45)
+                                  Image direct2 ("src/direct2.png", 1700, 840, 55, 45)
+                                  Timer t (100)
+                                }
+                                State pressed1
+                                {
+                                  
+                                  FillColor reed (255, 0, 0)
+                                  Rectangle ree (1580, 6200, 400, 400, 5, 5)
+                                  //Circle c1 (200, 200, 50)
+                                  Image direct ("src/direct.png", 1530, 840, 55, 45)
+                                  Image direct2 ("src/direct2.png", 1710, 840, 55, 45)
+                                  Timer t (100)
+                                }
+
+                                State pressed2
+                                {
+                                
+                                  FillColor reed (255, 0, 0)
+                                  Rectangle ree (1580, 6200, 400, 400, 5, 5)
+                                  
+                                  Image direct ("src/direct.png", 1520, 840, 55, 45)
+                                  Image direct2 ("src/direct2.png", 1720, 840, 55, 45)
+                                  Timer t (100)
+                                }
+
+                                State pressed3
+                                {
+                                  
+                                  FillColor reed (255, 0, 0)
+                              Rectangle ree (1580, 6200, 400, 400, 5, 5)
+                                  //Circle c1 (200, 200, 50)
+                                  Image direct ("src/direct.png", 1510, 840, 55, 45)
+                                  Image direct2 ("src/direct2.png", 1730, 840, 55, 45)
+                                  Timer t (100)
+                                }
 
 
-  FSM fsm1 {
-    State idle1 {
-     
-      FillColor reed (255, 0, 0)
-      Rectangle ree (1580, 6200, 400, 400, 5, 5)
-      //Circle c1 (200, 200, 50)
-      Image direct ("src/direct.png", 1540, 840, 55, 45)
-      Image direct2 ("src/direct2.png", 1700, 840, 55, 45)
-      Timer t (100)
-    }
-    State pressed1
-    {
-      
-      FillColor reed (255, 0, 0)
-      Rectangle ree (1580, 6200, 400, 400, 5, 5)
-      //Circle c1 (200, 200, 50)
-      Image direct ("src/direct.png", 1530, 840, 55, 45)
-      Image direct2 ("src/direct2.png", 1710, 840, 55, 45)
-      Timer t (100)
-    }
-
-    State pressed2
-    {
-     
-      FillColor reed (255, 0, 0)
-      Rectangle ree (1580, 6200, 400, 400, 5, 5)
-      
-      Image direct ("src/direct.png", 1520, 840, 55, 45)
-      Image direct2 ("src/direct2.png", 1720, 840, 55, 45)
-      Timer t (100)
-    }
-
-    State pressed3
-    {
-      
-      FillColor reed (255, 0, 0)
-   Rectangle ree (1580, 6200, 400, 400, 5, 5)
-      //Circle c1 (200, 200, 50)
-      Image direct ("src/direct.png", 1510, 840, 55, 45)
-      Image direct2 ("src/direct2.png", 1730, 840, 55, 45)
-      Timer t (100)
-    }
+                                idle1->pressed1 (idle1.t.end)
+                                pressed1->pressed2 (pressed1.t.end)
+                                pressed2->pressed3 (pressed2.t.end)
+                                pressed3->idle1 (pressed3.t.end)
+                                
+                                
+                              }
 
 
-    idle1->pressed1 (idle1.t.end)
-    pressed1->pressed2 (pressed1.t.end)
-    pressed2->pressed3 (pressed2.t.end)
-    pressed3->idle1 (pressed3.t.end)
-    
-    
-  }
 
+
+
+//waipoint
+
+
+     OutlineColor _ (0, 0, 0)
+     Line l (0, 430, 850, 430)
+
+     Line l2 (1000, 430, 1500, 430)
 
 
 
@@ -155,36 +167,26 @@ Component root {
   svg = loadFromXML ("src/Robot.png")
   Rotation Rot(0,440,330)
   Image Robot ("src/Robot.png", 425, 340, 150, 150)
+
+
+  /*ponit*/
+ 
+  Image point ("src/point.png", 425, 340, 150, 150)
   
 
 /*Bombe*/
   svg1 = loadFromXML ("src/Bombe.png")
-  //Rotation RotB(0,440,330)
-  Image Bombe ("src/Bombe.png", 890, 410, 35, 45)
   
+  Image Bombe ("src/Bombe.png", 0, 0, 35, 45)
+  
+f.move.x=:>Bombe.x
+
+f.move.y=:>Bombe.y
 
 
 
-Switch affiche_direction (sans_forme) {
-    Component sans_forme {
-      FillColor red (255, 0, 0)
-      Rectangle r (0, 0, 100, 70, 0, 0)
-    }
-    Component avec_forme {
-      FillColor green (0, 255, 0)
-      Rectangle r (0, 0, 100, 70, 0, 0)
-    }
-  }
 
-
-  FSM fsm {
-    State sans_forme
-    State avec_forme
-    sans_forme->avec_forme (affiche_direction.sans_forme.Robot.x)
-    avec_forme->sans_forme (affiche_direction.avec_forme.r.release)
-    avec_forme->idle (f.release)
-  }
-  fsm.state => affiche_direction.state
+  
 
 
 
@@ -193,33 +195,36 @@ Switch affiche_direction (sans_forme) {
 
 FSM fsm {
     State idle {
+      Image Bombe ("src/start.png",0, 0, 100, 100)
       FillColor red (255, 0, 0)
-      Rectangle r (0, 0, 100, 70, 0, 0)
+      FillOpacity a (0)
+      Rectangle r (0, 0, 100, 100, 0, 0)
     }
     State pressed
     {
-      FillColor green (0, 255, 0)
+      Image Bombe ("src/arret.png",1700,0, 100, 100)
+
+      FillColor green (255, 0, 0)
+      
       Rectangle r (0, 0, 100, 70, 0, 0)
+      
     
 
 
-    Circle c1 (1150, 850, 70)
 
-    Circle c2 (900, 850, 70)
+    
 
-    Circle c3 (650, 850, 70)
-
-    Circle c4 (400, 850, 70)
 
 
         /*Boutons Simulation*/
-        Button b (f, "Back Home", 1105, 825)
-        Button b2 (f, "STOP", 855, 825)
-        Button b3 (f, "PLAY", 605, 825)
-        Button b5 (f, "contunue", 355, 825)
+       
+        Button b (f,  " Back Home  ", 1105, 825)
+        Button b2 (f, "    STOP    ", 855, 825)
+        Button b3 (f, "    PLAY    ", 605, 825)
+        Button b5 (f, "  contunue  ", 355, 825)
         FillOpacity a (0)
-        Button b4 (f, "Gaucheeeee", 1500, 830)
-        Button b6 (f, "droiteeee", 1690, 825)
+        Button b4 (f, "   Gauche   ", 1500, 830)
+        Button b6 (f, "   droite       ", 1690, 825)
                 
         Clock sec (200)
         Incr x (1)
@@ -232,8 +237,10 @@ FSM fsm {
         sec.tick -> y
         x.state =:> Robot.x
         y.state =:> Robot.y
-        
-        
+
+        (x.state-100) => point.x
+        y.state => point.y
+       
 
 
       /*contoune gauche*/
@@ -241,6 +248,7 @@ FSM fsm {
         NativeAction nac2 (smala_action2_c,y,1)
         b4.click->nac1
         b4.click->nac2
+        
 
 
       /*contoune droit*/
@@ -268,14 +276,37 @@ FSM fsm {
         /*STOP*/
         NativeAction na5 (smala_action5,x,1)
         b2.click->na5
+
         (Robot.x>1500) ->na5
-        (Robot.x>710 && Robot.x<750) ->na5
+
+        (Robot.x>Bombe.x-25 && Robot.x<Bombe.x+25) ->na5
       
         
         
         /*Play*/
         NativeAction na9 (smala_action6,x,1)
         b3.click->na9
+
+     /*   na5=:> (FSM fsm___ {
+    State idle {
+      Timer t (1000)
+      FillColor red (255, 0, 0)
+      Rectangle r (0, 0, 100, 70, 0, 0)
+    }
+    State pressed
+    { Timer t (1000)
+      FillColor green (0, 255, 0)
+      Rectangle r (0, 0, 100, 70, 0, 0)
+    }
+    idle->pressed (idle.t.end)
+    pressed->idle (pressed.t.end)
+    
+  })*/
+
+
+        
+
+         
       }
     idle->pressed (idle.r.press)
     pressed->idle (pressed.r.press)
@@ -283,6 +314,7 @@ FSM fsm {
   }
 
 }
+
 
 
 
