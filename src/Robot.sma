@@ -18,6 +18,10 @@ Robot (Process frame, string path_to_png, double x0, double y0){
 
 	Double targetX(800)
 	Double targetY(600)
+	LogPrinter lp ("new targetX")
+	targetX =:> lp.input
+
+
 	FillColor fill(255,0,0)
 	Rectangle target(800,550,50,50)
 	Double Dist_initx(0)

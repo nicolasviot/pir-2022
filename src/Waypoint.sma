@@ -4,35 +4,33 @@ use base
 
 
 _define_
-Waypoint (Process frame, Double x, Double y){
+Waypoint (Process frame, double _x, double _y){
 
 
-x aka image.x
-y aka image.y
+
+FillColor fill(0, 255, 0)
+Circle cercle (_x, _y, 20)
 
 
-	Fsm drag_Waypoint{
+
+
+x aka cercle.cx
+y aka cercle.cy
+
+
+	FSM drag_Waypoint{
 		State idle
 		State moving{
-			frame.move.x =:> image.x
-			frame.move.y =:> image.y
+			frame.move.x =:> cercle.cx
+			frame.move.y =:> cercle.cy
 
 		}
 
-		idle -> moving(image.press)
-		moving -> idle(image.release)
+		idle -> moving(cercle.press)
+		moving -> idle(cercle.release)
 
 	}
 
 
 
 }
-
-
-
-
-
-
-Waypoint target(.....)
-target.x =:> robot.targetX
-target.y =:> robot.targetY 

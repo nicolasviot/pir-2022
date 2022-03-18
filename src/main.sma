@@ -5,6 +5,7 @@ use base
 
 import Button
 import Robot
+import Waypoint
 
 
 _action_
@@ -347,6 +348,11 @@ FSM fsm {
 
 
 Robot myrobot(f, "src/Robot.png", 0, 0)
+Waypoint myWaypoint(f, 500, 500)
+myWaypoint.x =:> myrobot.targetX
+myWaypoint.y =:> myrobot.targetY
+
+
 }
 
 

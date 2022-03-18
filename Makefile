@@ -11,7 +11,7 @@ redirect: default
 
 # cpp example
 exe := button
-srcs_sma := src/Button.sma  src/Robot.sma src/main.sma#srcs_sma := $(shell find $(src_dir) -name "*.sma")
+srcs_sma := src/Waypoint.sma src/Button.sma  src/Robot.sma src/main.sma#srcs_sma := $(shell find $(src_dir) -name "*.sma")
 srcs_other := src/foo.cpp
 #srcs_other := $(shell find $(src_dir) -name "*.cpp")
 
