@@ -10,67 +10,54 @@ _define_
 Robot (Process frame, string path_to_png, double x0, double y0){
 
 
-	Double x (0)
-	Double y (0)
+	Double vitesse(10)
 
-	Double vitesseX(2)
-	Double vitesseY(2)
+
+	Double step_to_arrival(0)
+
+	Double distance_to_target(0)
+ 	Image robot (path_to_png, 100, 600, 150, 150)
 
 	Double targetX(800)
 	Double targetY(600)
-	LogPrinter lp ("new targetX")
-	targetX =:> lp.input
-
-
-	FillColor fill(255,0,0)
-	Rectangle target(800,550,50,50)
-	Double Dist_initx(0)
-	Double Dist_inity(0)
- 	Rotation Rot(0,440,330)
- 	Image robot (path_to_png, 100, 600, 150, 150)
-
-	Image bombe ("src/Bombe.png", 100, 100, 35, 45)
-	Double to_be_squared(0)
-	Double distance(0)
 
 	Sqrt mysqrt(0)
 	Pow left_pow (0, 2)
 	Pow right_pow (0, 2)
+	Double to_be_squared(0)
 
-	robot.x - bombe.x =:> left_pow.base 
-	robot.y - bombe.y =:> right_pow.base
+	robot.x - targetX =:> left_pow.base 
+	robot.y - targetY =:> right_pow.base
 	left_pow.result + right_pow.result =:> to_be_squared
 	to_be_squared =:> mysqrt.input
-	mysqrt.output => distance
+	mysqrt.output => distance_to_target
+
+
+
+
 
 
 
 	Spike goto
 	Spike arrived
-	frame.move.x=:>bombe.x
 
-	frame.move.y=:>bombe.y
-	
-
-	
-
- 	 robot.x =:> x
- 	 robot.y =:> y
-
-	((targetX - robot.x )< 100) -> arrived
-
-	((targetX - robot.x )> 100) -> goto
+	((distance_to_target)< 100) -> arrived
 
  	 FSM robot_fsm{
  	 	State idle
- 	 	State start_moving {
+ 	 	State start_moving { 
+ 	 		LogPrinter lp2 ("debug in fsm")
+
+ 	 		Double x0($robot.x)
+ 	 		Double y0($robot.y)
+ 			Double nb_step(0)
+ 			distance_to_target / vitesse =: nb_step 
  	 		Clock myclock(100)
-
-
+ 	 		nb_step =: lp2.input
  	 		myclock.tick -> (this){
  	 			//funciton incrément
- 	 			this.robot.x = this.robot.x + this.vitesseX
- 	 			this.robot.y = this.robot.y + this.vitesseY
+ 	 			this.robot.x = this.robot.x + (this.targetX - this.robot_fsm.start_moving.x0)/ this.robot_fsm.start_moving.nb_step
+ 	 			this.robot.y = this.robot.y + (this.targetY - this.robot_fsm.start_moving.y0)/ this.robot_fsm.start_moving.nb_step
  	 		}
 
 
@@ -87,10 +74,10 @@ Robot (Process frame, string path_to_png, double x0, double y0){
  	 }
 
 
-	(distance < robot.width + 75) -> arrived
+	(distance_to_target < robot.width + 100) -> arrived
 
-LogPrinter lp("debug robot fsm : ")
+LogPrinter lp ("debug : ")
+
 robot_fsm.state =:> lp.input
-
 
 }
