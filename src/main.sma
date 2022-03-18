@@ -335,8 +335,7 @@ FSM fsm {
 
 
         
-
-         
+ 
       }
     idle->pressed (idle.r.press)
     pressed->idle (pressed.r.press)
@@ -347,7 +346,7 @@ FSM fsm {
 
 
 
-Robot myrobot("src/Robot.png", 0, 0)
+Robot myrobot(f, "src/Robot.png", 0, 0)
 }
 
 
