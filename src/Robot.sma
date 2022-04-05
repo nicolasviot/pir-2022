@@ -17,8 +17,9 @@ Robot (Process frame, string path_to_png, double x0, double y0){
 
 	Double distance_to_target(0)
  	Image robot (path_to_png, 1200, 600, 150, 150)
-
-	Double targetX(0)
+	x aka robot.x
+	y aka robot.y
+	Double targetX(600)
 	Double targetY(600)
 
 	Sqrt mysqrt(0)
@@ -93,11 +94,6 @@ Robot (Process frame, string path_to_png, double x0, double y0){
  	 	}
 
 		  
-
-
-
-
-		
 
  	 	idle -> start_moving (goto)
  	 	start_moving -> idle (arrived)

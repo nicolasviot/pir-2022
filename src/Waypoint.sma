@@ -23,12 +23,9 @@ y aka cercle.cy
 		State moving{
 			frame.move.x =:> cercle.cx
 			frame.move.y =:> cercle.cy
-
 		}
-
 		idle -> moving(cercle.press)
 		moving -> idle(cercle.release)
-
 	}
 
 
