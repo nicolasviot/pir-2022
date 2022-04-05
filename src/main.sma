@@ -9,6 +9,7 @@ import Waypoint
 import detour
 import Bombe
 import side
+import side_bas
 
 
 _main_

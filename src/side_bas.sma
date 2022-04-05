@@ -4,15 +4,15 @@ use base
 
 
 _define_
-side (){
+side_bas (){
 
 
 
 FillColor fill(0, 255, 0)
 
-FillOpacity fo (0.5)
+FillOpacity fo (1)
 FillColor fc (100, 100, 100)
-Rectangle r (100, 100, 200, 50, 0, 0)
+Rectangle r (200, 100, 200, 50, 0, 0)
 LogPrinter lp ("valeur de l'incrément : ")
 
 col aka fo.a
@@ -25,9 +25,9 @@ col aka fo.a
 			Timer t (20000)
 			Clock sec (1000)
 			
-			Incr x (1)
+			decr x (1)
 			sec.tick -> x
-			col + x.state/300 =:> col
+			col - x.state/300 =:> col
 			fc.g + (x.state*4) =:> fc.r
 			x.state =:>lp.input
 
