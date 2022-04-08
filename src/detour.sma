@@ -3,6 +3,8 @@ use gui
 use base
 import side
 import side_bas
+import side_bas_cycle
+import side_cycle
 _define_
 detour (string init_state){
 
@@ -16,10 +18,6 @@ Circle cercle_1 (70 , 0 , 15)
 Circle cercle_2 (30, -40, 15)
 Circle cercle_3 (-30, -40, 15)
 Circle cercle_4 (-70, 0, 15)
-
-
-
-
 
 
 
@@ -51,20 +49,30 @@ Circle cercle_4 (-70, 0, 15)
 	cercle_4.cy =:> myline_3.y2
 
 
+Rotation anti_rot(0,0,0)
+rot.cx =:> anti_rot.cx
+rot.cy =:> anti_rot.cy
+- rot.a =:> anti_rot.a
 Switch which_side(bas){
 	Component bas{
-		side_bas myside(400, 100)
+		side_bas myside(-50, -150)
+		side_bas_cycle myside(0, -300)
 
 	}
 
 	Component haut{
-		side myside(100, 100)
+		side myside(-50, 100)
+		side_cycle myside(0,250)
 	}
 }
 
 String switch_status (init_state)
 
 switch_status =:> which_side.state
+
+
+
+
 
 
 Spike touch

@@ -12,7 +12,7 @@ FillColor fill(0, 255, 0)
 
 FillOpacity fo (0.5)
 FillColor fc (100, 100, 100)
-Rectangle r (_x, _y, 200, 50, 0, 0)
+Rectangle r (_x, _y, 100, 50, 0, 0)
 LogPrinter lp ("valeur de l'incrément : ")
 
 col aka fo.a
@@ -23,8 +23,8 @@ wi aka r.width
 			
 		}
 		State level1{
-			Timer t (20000)
-			Clock sec (1000)
+			Timer t (5000)
+			Clock sec (500)
 			
 			Incr x (1)
 			sec.tick -> x
