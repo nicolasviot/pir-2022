@@ -4,7 +4,7 @@ use base
 
 
 _define_
-side_bas (){
+side_bas (double x, double y){
 
 
 
@@ -12,10 +12,11 @@ FillColor fill(0, 255, 0)
 
 FillOpacity fo (1)
 FillColor fc (100, 100, 100)
-Rectangle r (200, 100, 200, 50, 0, 0)
+Rectangle r (x, y, 10, 50, 0, 0)
 LogPrinter lp ("valeur de l'incrément : ")
 
 col aka fo.a
+wi1 aka r.width
 
 	FSM rect{
 		State idle{
@@ -25,12 +26,13 @@ col aka fo.a
 			Timer t (20000)
 			Clock sec (1000)
 			
-			/*Decr x (1)
+			Incr x (1)
 			sec.tick -> x
 			col - x.state/300 =:> col
+			wi1 + (x.state) =:> wi1
 			fc.g + (x.state*4) =:> fc.r
 			x.state =:>lp.input
-*/
+
 
 			
 		}

@@ -45,7 +45,7 @@ myWaypoint.y =:> myrobot.targetY
 myWaypoint.drag_Waypoint.moving -> myrobot.arrived
 
 
-side myside()
+
 LogPrinter lp ("debug tangent : ")
 
 
@@ -55,8 +55,8 @@ FSM show_detour{
 
   }
   State show{
-    detour detour1 (f, -40, -40,-40, -40, -40, -40)
-    detour detour2 (f, -40, -40,-40, -40, -40, -40)  
+    detour detour1 ("bas")
+    detour detour2 ("haut")  
     myBombe.x =:> detour1.t.tx  
     myBombe.y =:> detour1.t.ty
     myBombe.x =:> detour2.t.tx  
@@ -64,7 +64,7 @@ FSM show_detour{
     Tangent tan (0)
     (myWaypoint.x - myrobot.x)/(myWaypoint.y - myrobot.y) =:> tan.input
     tan.output * 180 / 3.14 =:> detour1.rot.a
-    tan.output * 180 / 3.14+ 180 =:> detour2.rot.a 
+    tan.output * 180 / 3.14 + 180 =:> detour2.rot.a 
     tan.output =:> lp.input
 
   }

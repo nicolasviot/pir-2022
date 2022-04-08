@@ -1,10 +1,10 @@
 use core
 use gui
 use base
-
-
+import side
+import side_bas
 _define_
-detour (Process frame, double _x_d_1, double _y_d_1, double _x_d_2, double _y_d_2, double _x_d_3 , double _y_d_3){
+detour (string init_state){
 
 Translation t (0, 0)
 Rotation rot (0 ,0 ,0)
@@ -50,6 +50,21 @@ Circle cercle_4 (-70, 0, 15)
 	cercle_4.cx =:> myline_3.x2
 	cercle_4.cy =:> myline_3.y2
 
+
+Switch which_side(bas){
+	Component bas{
+		side_bas myside(400, 100)
+
+	}
+
+	Component haut{
+		side myside(100, 100)
+	}
+}
+
+String switch_status (init_state)
+
+switch_status =:> which_side.state
 
 
 Spike touch
