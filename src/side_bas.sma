@@ -25,12 +25,12 @@ col aka fo.a
 			Timer t (20000)
 			Clock sec (1000)
 			
-			decr x (1)
+			/*Decr x (1)
 			sec.tick -> x
 			col - x.state/300 =:> col
 			fc.g + (x.state*4) =:> fc.r
 			x.state =:>lp.input
-
+*/
 
 			
 		}

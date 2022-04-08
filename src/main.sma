@@ -26,23 +26,55 @@ Rectangle ree (0,0, 1900, 1000, 0, 0)
 
 Bombe myBombe(f, 700, 700)
 
-detour myDetour(f, $myBombe.x + 50, $myBombe.y+50, $myBombe.x ,$myBombe.y+50,$myBombe.x+50 ,$myBombe.y)
+//detour myDetour(f, $myBombe.x + 50, $myBombe.y+50, $myBombe.x ,$myBombe.y+50,$myBombe.x+50 ,$myBombe.y)
 
 Robot myrobot(f, "src/Robot.png", 0, 0)
 Waypoint myWaypoint(f, 500, 500)
 myWaypoint.x =:> myrobot.targetX
 myWaypoint.y =:> myrobot.targetY
-
+/*
 ($myBombe.x>$myWaypoint.x)-> (root){
  root.myrobot.targetX = root.myBombe.x 
  root.myrobot.targetY = root.myBombe.y
 }
+*/
 
+
+(((myBombe.y - myrobot.y)*(myBombe.y - myrobot.y)) < 50) && (((myBombe.y - myrobot.y)*(myBombe.y - myrobot.y)) < 50) ->myrobot._stop
 
 myWaypoint.drag_Waypoint.moving -> myrobot.arrived
 
 
 side myside()
+LogPrinter lp ("debug tangent : ")
+
+
+
+FSM show_detour{
+  State no_show{
+
+  }
+  State show{
+    detour detour1 (f, -40, -40,-40, -40, -40, -40)
+    detour detour2 (f, -40, -40,-40, -40, -40, -40)  
+    myBombe.x =:> detour1.t.tx  
+    myBombe.y =:> detour1.t.ty
+    myBombe.x =:> detour2.t.tx  
+    myBombe.y =:> detour2.t.ty
+    Tangent tan (0)
+    (myWaypoint.x - myrobot.x)/(myWaypoint.y - myrobot.y) =:> tan.input
+    tan.output * 180 / 3.14 =:> detour1.rot.a
+    tan.output * 180 / 3.14+ 180 =:> detour2.rot.a 
+    tan.output =:> lp.input
+
+  }
+  no_show -> show(myrobot._stop)  
+}
+
+
+
+
+
 }
 
 

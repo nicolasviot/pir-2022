@@ -42,6 +42,7 @@ Robot (Process frame, string path_to_png, double x0, double y0){
 	Spike goto
 	Spike arrived
 	Spike left
+	Spike _stop
 
 
 	//(robot.x > targetX) -> left 
@@ -102,6 +103,8 @@ Robot (Process frame, string path_to_png, double x0, double y0){
 		start_moving -> start_moving (targetY)
  	 	idle -> start_moving (robot.press)
 		start_moving -> idle(robot.press)
+
+		start_moving -> idle (_stop)
 		
  	 }
 
